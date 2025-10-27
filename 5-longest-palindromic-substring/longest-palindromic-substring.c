@@ -20,11 +20,11 @@ char* longestPalindrome(char* s) {
     if (s == NULL) return NULL;
 
     int n = strlen(s);
-    if (n == 0) {
-        char *empty = malloc(1);
-        if (empty) empty[0] = '\0';
-        return empty;
-    }
+    // if (n == 0) {
+    //     char *empty = malloc(1);
+    //     if (empty) empty[0] = '\0';
+    //     return empty;
+    // }
 
     int maxLength = 0;
     int bestStart = 0;
