@@ -52,7 +52,7 @@ struct ListNode* modifiedList(int* nums, int numsSize, struct ListNode* head) {
     struct ListNode *prev = NULL;
 
     while (temp != NULL) {
-        if (mark[temp->val]) {  // if this value needs to be deleted
+        if (mark[temp->val]==1) {  // if this value needs to be deleted
             if (temp == head) {
                 head = temp->next;
             } else {
