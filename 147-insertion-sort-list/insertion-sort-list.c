@@ -34,7 +34,7 @@
    
 // }
 struct ListNode* insertionSortList(struct ListNode* head) {
-    if (!head || !head->next) return head; // base case
+    //if (!head || !head->next) return head; // base case
 
     struct ListNode *temp, *prev, *curr, *future;
     curr = head->next;  // start from 2nd node
