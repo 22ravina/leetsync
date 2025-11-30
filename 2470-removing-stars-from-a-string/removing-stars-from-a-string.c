@@ -23,7 +23,7 @@ char* removeStars(char* s) {
         s++;
 
     }
-    stack[top + 1] = '\0'; 
+    stack[++top ] = '\0'; 
     return stack;
 
     
