@@ -32,14 +32,15 @@ struct ListNode* partition(struct ListNode* head, int x) {
         }
         curr = curr->next;
     }
+    if (bigTail!=NULL) bigTail->next = NULL;
     
     if (smallHead == NULL) {
-        if (bigTail!=NULL) bigTail->next = NULL;
+        //if (bigTail!=NULL) bigTail->next = NULL;
         return bigHead;
     }
     smallTail->next = bigHead;
 
-    if (bigTail!=NULL) bigTail->next = NULL;
+    //if (bigTail!=NULL) bigTail->next = NULL;
 
     return smallHead;
  
