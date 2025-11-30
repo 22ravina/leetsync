@@ -33,7 +33,7 @@ struct ListNode* partition(struct ListNode* head, int x) {
         curr = curr->next;
     }
     if (smallHead == NULL) {
-        if (bigTail) bigTail->next = NULL;
+        if (bigTail!=NULL) bigTail->next = NULL;
         return bigHead;
     }
     smallTail->next = bigHead;
