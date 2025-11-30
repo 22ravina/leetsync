@@ -28,5 +28,5 @@ bool checkValidString(char* s) {
         topStar--;
     }
 
-    return top == -1;
+    return top==-1;
 }
