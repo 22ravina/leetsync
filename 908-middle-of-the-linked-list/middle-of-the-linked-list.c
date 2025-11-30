@@ -5,24 +5,20 @@
  *     struct ListNode *next;
  * };
  */
-
-int sizeofLL(struct ListNode *head){
-    struct ListNode *temp = head;
-    int size =0;
-    while(temp!=NULL){
-        size++;
-        temp = temp->next;
+int len(struct ListNode* head){
+    int count =0;
+    while(head!=NULL){
+        count++;
+        head = head->next;
     }
-    return size;
+   
+    return count;
 }
 struct ListNode* middleNode(struct ListNode* head) {
-    int size = sizeofLL(head);
-    struct ListNode *temp = head;
-
-    for(int i=0;i<size/2;i++){
+    struct ListNode* temp = head;
+    for(int i=0;i<len(head)/2;i++){
         temp = temp->next;
     }
-
     return temp;
 
 
