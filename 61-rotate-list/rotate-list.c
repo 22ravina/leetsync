@@ -13,21 +13,29 @@ int len(struct ListNode* head){
     }
     return count;
 }
-struct ListNode* deleteTail(struct ListNode* head){
+struct ListNode* removeTail(struct ListNode* head, struct ListNode** dNode) {
+    if (head == NULL) {
+        *dNode = NULL;
+        return NULL;
+    }
+
+    if (head->next == NULL) { // only 1 node
+        *dNode = head;
+        return NULL;  // list becomes empty
+    }
+
     struct ListNode* temp = head;
-    if(temp==NULL){
-        return head;
-    }
-    if(temp->next ==NULL){
-        return head;
-    }
-    while(temp->next!=NULL && temp->next->next!=NULL){
+
+    while (temp->next->next != NULL) {
         temp = temp->next;
     }
-    struct ListNode* dNode = temp->next;
-    temp->next = temp->next->next;
-    return dNode;
+
+    *dNode = temp->next;     // last node
+    temp->next = NULL;       // detach tail
+
+    return head;             // updated list
 }
+
 struct ListNode* addFirst(struct ListNode* head,struct ListNode* node){
     node->next = head;
     return node;
@@ -35,16 +43,18 @@ struct ListNode* addFirst(struct ListNode* head,struct ListNode* node){
 }
 struct ListNode* rotateRight(struct ListNode* head, int k) {
     int n = len(head);
-    if(n == 0 || k == 0) return head;
-    k = k%n;
-    if(k == 0) return head;
+    if (n == 0 || k == 0) return head;
+
+    k %= n;
+    if (k == 0) return head;
+
     struct ListNode* dNode = NULL;
-    struct ListNode* Main_Head =head;
-    for(int i=0;i<k;i++){
-        dNode = deleteTail(head);
-        Main_Head = addFirst(Main_Head,dNode);
-        
+
+    while (k--) {
+        head = removeTail(head, &dNode);  // get last node in dNode
+        dNode->next = head;               // insert at head
+        head = dNode;                     // update head
     }
-    return Main_Head;
- 
+
+    return head;
 }
