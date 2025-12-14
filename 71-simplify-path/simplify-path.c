@@ -52,7 +52,8 @@ char* simplifyPath(char* path) {
     }
     char *ans = malloc(n+ 2);
     int i = 0;
-    ans[i++] = '/';
+    ans[i] = '/';
+    i++;
 
     while (rev != NULL) {
         int len = strlen(rev->data);
@@ -66,5 +67,4 @@ char* simplifyPath(char* path) {
     }
     ans[i] = '\0';
     return ans;
-
 }
