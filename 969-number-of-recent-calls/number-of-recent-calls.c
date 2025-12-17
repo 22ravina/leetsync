@@ -2,65 +2,64 @@ typedef struct Node{
     int data;
     struct Node *next;
 }Node;
+
 typedef struct {
     Node *rear;
-    Node *front;  
+    Node *front;
+    int size;
 } RecentCounter;
 
 
 RecentCounter* recentCounterCreate() {
-    RecentCounter* rc = malloc(sizeof(RecentCounter));
-    rc->rear = NULL;
-    rc->front = NULL;
-
-    return rc;
-
+    RecentCounter *newNode = malloc(sizeof(RecentCounter));
+    newNode->rear = NULL;
+    newNode->front = NULL;
+    newNode->size = 0;
+    return newNode;   
 }
+//are u there ??
+
+
 int recentCounterPing(RecentCounter* obj, int t) {
-    Node *newNode = malloc(sizeof(Node));
-    newNode->data = t;
-    newNode ->next = NULL;
-    if(obj->front ==NULL){
-        obj->front = newNode;
-        obj->rear = newNode;
-
-    }else{
-    obj->rear->next= newNode;
-    obj->rear = newNode;
-    }
+    Node *temp = malloc(sizeof(Node));
+    temp->data = t;
+    temp->next = NULL;
     
+
+    if(obj->front==NULL){
+        obj->front=obj->rear=temp;
+        obj->size++;
+    }else{
+        obj->rear->next = temp;
+        obj->rear = temp;
+        obj->size++;
+    }
+
     int range = t-3000;
-    while (obj->front != NULL && obj->front->data < range) {
+    
+    if(range<0){
+        return obj->size;
+    }
+    while(obj->front!=NULL && obj->front->data<range){
         Node *del = obj->front;
-        obj->front = obj->front->next;
+        obj->front=obj->front->next;
         free(del);
+        obj->size--;
     }
+    return obj->size;
 
-    int count = 0;
-    Node *temp = obj->front;
-    while (temp != NULL) {
-        count++;
-        temp = temp->next;
-    }
-
-    return count; 
+    
 }
 
 void recentCounterFree(RecentCounter* obj) {
-    Node *temp = obj->front;
+    Node* temp = obj->front;
     while(temp!=NULL){
-        Node *f = temp;
+        Node* f = temp;
         temp = temp->next;
         free(f);
     }
     free(obj);
+
     
 }
 
-/**
- * Your RecentCounter struct will be instantiated and called as such:
- * RecentCounter* obj = recentCounterCreate();
- * int param_1 = recentCounterPing(obj, t);
- 
- * recentCounterFree(obj);
-*/
